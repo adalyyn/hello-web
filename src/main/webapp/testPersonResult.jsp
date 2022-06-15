@@ -12,6 +12,9 @@
 	System.out.println("color@jsp = " + color);
 	System.out.println("animal@jsp = " + animal);
 	System.out.println("food@jsp = " + (foods != null ? Arrays.toString(foods) : null));	//import문 직접 작성
+	
+	String recommendation = (String) request.getAttribute("recommendation");	//전달된 속성을 꺼내서 씀. Object를 반환하기때문에 다운캐스팅 필수!
+	System.out.println("recommendation@jsp = " + recommendation);
 %>
 
 <!Doctype html>
@@ -27,5 +30,8 @@
 <p>선호색상 : <%= color %></p>
 <p>선호동물 : <%= animal %></p>
 <p>선호음식 : <%= foods != null ? Arrays.toString(foods) : "없음" %></p>
+<hr />
+<h2><span><%= name %></span>님, 오늘은 <mark><%=recommendation%></mark> 어떠세요?</h2>
+
 </body>
 </html>

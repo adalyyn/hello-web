@@ -24,7 +24,7 @@ public class TestPersonServlet3 extends HttpServlet {
 		
 		// 2. 사용자 입력값 옮겨 담기(폼 태그 하위에 중요한건 id값이 아님. 전송되는 name값이 중요)
 		String name = request.getParameter("name");		//name값을 가져오는 것임.
-		String color =request.getParameter("color");	//name값을 가져오는 것임.
+		String color =request.getParameter("color");	
 		String animal = request.getParameter("animal");
 		String[] foods = request.getParameterValues("food");
 
@@ -35,8 +35,19 @@ public class TestPersonServlet3 extends HttpServlet {
 		
 		
 		// 3. 업무로직 처리
+		// 추천서비스 제공해보기
+		String recommendation = "";	//request에 담긴 데이터가 아님. 직접 jsp에 전달하는 방법은 없다.
+		switch(color) {
+		case "빨강" : recommendation = "빨간 초장을 버무린 회덮밥"; break;
+		case "노랑" : recommendation = "산뜻한 노란 우산"; break;
+		case "초록" : recommendation = "초록색 애벌레"; break;
+		case "파랑" : recommendation = "파란색 죠스바"; break;
+		}
+		
 		
 		// 4. 응답메세지 작성 -> jsp에 위임(html은 jsp가 만들거야~)
+		// jsp에 데이터 전달 속성으로 전달 : request(키,밸류데이터)
+		request.setAttribute("recommendation", recommendation);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/testPersonResult.jsp");
 		reqDispatcher.forward(request, response);
 	}
